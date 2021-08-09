@@ -3,13 +3,14 @@ var app = express();
 var server = require('http').createServer(app);
 var faker = require('faker');
 var port = process.env.PORT || 3000;
+var minify = require('express-minify');
 
 // user model
 const SigmaRillion = require('./models/Sigma');
 require('./libs/db-connection');
 // view engine
 app.set('view engine', 'ejs');
-
+app.use(express.static('public'));
 // routes
 
 app.get('/', function(req,res){
@@ -32,10 +33,9 @@ app.get('/', function(req,res){
 for(var i=1; i<dati.length; i++){
 ValoriOrario[i] = (Math.abs(dati[i].Orario-dati[0].Orario)/60000).toFixed(2);
 }
-		res.render('index',{Sigma:ValoriSigma, Orario:ValoriOrario});
+		res.render('Grafico',{Sigma:ValoriSigma, Orario:ValoriOrario});
 });
 });
-
 
 //la pagina generate genera valori a caso per popolare il grafico, ma non dovrebbe servire in futuro
 
@@ -50,6 +50,5 @@ app.get('/generate', (req, res) => {
   res.redirect('/');
 });
 
-server.listen(port, () => console.log(`App running on port ${port}`));
-
+server.listen(port, () => console.log(`L'applicazione sta girando sulla porta ${port}`));
 
