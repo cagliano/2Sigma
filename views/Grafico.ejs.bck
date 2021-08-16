@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Paolo Panzeri">
+    <title>Piduemme - Andamento 2Sigma per [nomecliente]</title>
+
+    <!-- Bootstrap core CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
+<style>body {
+    font-family: Ubuntu, "times new roman", times, roman, serif;
+    line-height: 1;
+},
+
+body {
+  background: rgb(204,204,204); 
+}
+page {
+  background: white;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 0.5cm;
+  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+}
+page[size="A4"] {  
+  width: 21cm;
+  height: 29.7cm; 
+}
+page[size="A4"][layout="landscape"] {
+  width: 29.7cm;
+  height: 21cm;  
+}
+@media print {
+  body, page {
+    margin: 0;
+    box-shadow: 0;
+  }
+}
+</style>
+  </head>
+  <body>
+<page>   
+<div class="container-fluid">
+  <div class="row">
+
+        <div class="col-md-4 ms-sm-auto col-lg-4 px-md-4">
+        <img src="Piduemme.jpg" width=200 />
+        </div>
+<div class="col-md-4 ms-sm-auto col-lg-4 px-md-4">
+        </div>
+
+<div class="col-md-4 ms-sm-auto col-lg-4 px-md-4">
+<p class="text-right">
+        Certificati UNI EN ISO 9001 e UNI EN 15593
+</p><p class="text-right">
+<strong>PIDUEMME Srl</strong><br>
+Via delle Industrie 6/8 23889 Santa Maria Hoè (LC)<br>
+Tel. 039/570151  Web: www.piduemme.it<br>
+E-mail: piduemme@piduemme.it<br>
+Codice Fiscale – Partita IVA : 00747530137
+</p>
+</div>
+
+
+
+
+
+
+
+    <main class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+       
+        
+      </div>
+      <div class="row">
+        <div class="col-md-8 ms-sm-auto col-lg-8 px-md-4">
+ <h1 class="h2">Andamento 2 Sigma</h1>
+      <canvas class="my-4 w-100" id="Grafico2Sigma" ></canvas>
+	</div>
+<div class="col-md-3 ms-sm-auto col-lg-3 px-md-4">
+  <h1>Indicatori</h1>
+<div class="py-3">
+	<h3> Inizio lavorazione</h3>
+	  <%= Inizio %>
+  </div>
+<div class="py-3">
+	<h3> Fine lavorazione</h3>
+	   <%= Fine %>
+
+  </div>
+<div class="py-3">
+	<h3> 2Sigma Medio</h3>
+	   <%= Medio  %>
+
+  </div>
+
+<div class="py-3">
+	<h3>Estremi</h3>
+	<%= EstremoInferiore %> - <%= EstremoSuperiore %>
+
+  </div>
+
+
+
+
+
+</div>
+      </div>
+  
+
+    </main>
+  </div>
+</div>
+
+ <!-- grafico -->
+ </script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+  <script>
+    let ctx = document.querySelector('#Grafico2Sigma').getContext('2d');
+
+
+var barChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: [<%= Orario %> ],
+    datasets: [{
+	    label:"2Sigma",
+		      data:[ <%= Sigma %>   ] 
+    }]
+  },
+ 
+  options: {
+   legend: {
+        display: false
+      },
+		    plugins: {
+      // Change options for ALL labels of THIS CHART
+      datalabels: {
+        display: false
+      }
+    }
+  },
+
+
+	  });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</page>
+</body>
+</html>
+
