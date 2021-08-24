@@ -7,8 +7,6 @@ var port = process.env.PORT || 3000;
 var minify = require('express-minify');
 
 
-
-
 // user model
 const SigmaRillion = require('./models/Sigma');
 require('./libs/db-connection');
@@ -28,7 +26,6 @@ app.get('/', function (req, res) {
       ValoriSigma = dati.map(function (obj) {
         return obj.Sigma;
       });
-
       //l'orario non è assoluto ma in minuti dalla partenza
       var ValoriOrario = [];
       // azzero l'array e poi metto come valore 0 il primo rilevamento
@@ -52,51 +49,27 @@ app.get('/', function (req, res) {
 
 //la pagina generate genera valori a caso per popolare il grafico, ma non dovrebbe servire in futuro
 
-app.get('/generate', (req, res) => {
-  for (let i = 0; i < 100; i++) {
-    let Orario = faker.date.recent(),
-      Sigma = faker.random.number({ 'min': 10, 'max': 50 })
-    SigmaRillion.create({ Orario: Orario, Sigma: Sigma })
-      .then(() => { })
-      .catch(err => console.error(err));
-  } // end for loop
-  res.redirect('/');
-});
 
+const url = "http://localhost:3000/";
 app.get("/pdf", async (req, res) => {
-  const url = "http://localhost:3000/";
-  //  const url = "https://getbootstrap.com/";
   const browser = await puppeteer.launch({
     headless: true
   });
-
   const webPage = await browser.newPage();
-
   await webPage.goto(url, {
     waitUntil: "networkidle0"
   });
-
+  await webPage.addStyleTag({ content: 'canvas#Grafico2Sigma { display: block; height: 366px !important; width: 892px !important;}'  })  
   const pdf = await webPage.pdf({
-    printBackground: false,
-    //          landscape: true, // <-- must be set to true to get a landscape PDF
-    landscape: true,
-    format: "A4",
-    path: '/home/ubuntu/2Sigma/landscappa.pdf'
+  printBackground: false,
+  landscape: true,
+  format: "A4",
+  path: '/home/ubuntu/2Sigma/landscappa.pdf'
   });
-
   await browser.close();
-
   res.contentType("application/pdf");
   res.send(pdf);
 })
 
 
-
-
-
-
-
-
-
 server.listen(port, () => console.log(`L'applicazione sta girando sulla porta ${port}`));
-

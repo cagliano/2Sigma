@@ -11,21 +11,14 @@
   "author": "germancutraro",
   "license": "MIT",
   "dependencies": {
-    "async": "^3.2.1",
-    "await": "^0.2.6",
     "bootstrap": "^5.1.0",
     "chartjs-plugin-datalabels": "^2.0.0",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "express-minify": "^1.0.0",
     "faker": "^4.1.0",
-    "luxon": "^2.0.2",
     "mongoose": "^4.13.5",
     "node-minify": "^3.6.0",
-    "nodemon": "^2.0.12",
-    "puppeteer": "^5.0.0"
-  },
-  "devDependencies": {
-    "eslint": "^7.32.0"
+    "nodemon": "^2.0.12"
   }
 }
